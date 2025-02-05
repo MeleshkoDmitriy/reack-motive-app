@@ -1,9 +1,18 @@
-import { Text, View } from "react-native";
+import React from 'react';
+import { View, Text, Image } from 'react-native';
 
-export const ProfileScreen = () => {
+export const ProfileScreen = ({ route }) => {
+  const { name, image } = route.params;
+
   return (
     <View>
-      <Text>ProfileScreen</Text>
+      <Text>Profile of {name}</Text>
+      <View>
+        <Image
+          style={{ width: 100, height: 100 }}
+          source={{ uri: image }}
+        />
+      </View>
     </View>
   );
 };

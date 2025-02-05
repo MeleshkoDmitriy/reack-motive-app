@@ -5,7 +5,7 @@ import { CharactersScreen } from "@/screens/CharactersScreen";
 import { ProfileScreen } from "@/screens/ProfileScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { SettingsScreen } from "@/screens/SettingsScreen";
-import { TProfileParams } from "@/types/ProfileTypes";
+import { TProfileParams } from "@/types/ProfileScreenTypes";
 
 const Stack = createNativeStackNavigator();
 
