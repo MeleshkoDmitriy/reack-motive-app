@@ -1,18 +1,17 @@
-import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { CharacterProfile } from "@/components/CharacterProfile";
+import { useAppSelector } from "@/hooks/reduxHooks";
+import { selectTheme } from "@/store/slices/themeSlice";
+import { getThemeStyles } from "@/styles/themeStyles";
+import React from "react";
+import { View } from "react-native";
 
 export const ProfileScreen = ({ route }) => {
-  const { name, image } = route.params;
+  const selectedTheme = useAppSelector(selectTheme);
+  const themeStyles = getThemeStyles(selectedTheme);
 
   return (
-    <View>
-      <Text>Profile of {name}</Text>
-      <View>
-        <Image
-          style={{ width: 100, height: 100 }}
-          source={{ uri: image }}
-        />
-      </View>
+    <View style={themeStyles.wrapper}>
+      <CharacterProfile character={route.params} />
     </View>
   );
 };

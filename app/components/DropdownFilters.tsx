@@ -10,14 +10,21 @@ import {
   setSpecies,
   setStatus,
 } from "@/store/slices/filterSlice";
+import { selectTheme } from "@/store/slices/themeSlice";
+import { getThemeStyles } from "@/styles/themeStyles";
+import { styleVariables } from "@/styles/variables";
 import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
+import { Button } from "./shared/buttons/Button";
 
 const DropdownFilters = () => {
   const dispatch = useAppDispatch();
   const selectedSpecies = useAppSelector(selectSpecies);
   const selectedStatus = useAppSelector(selectStatus);
+
+  const selectedTheme = useAppSelector(selectTheme);
+  const themeStyles = getThemeStyles(selectedTheme);
 
   const handleResetFilters = () => {
     dispatch(resetFilters());
@@ -30,9 +37,9 @@ const DropdownFilters = () => {
           data={dropdownSpeciesVariants}
           value={selectedSpecies}
           onChange={(value) => dispatch(setSpecies(value.value))}
-          style={styles.dropdown}
+          style={[styles.dropdown, themeStyles.container]}
           placeholderStyle={styles.placeholderStyle}
-          selectedTextStyle={styles.selectedTextStyle}
+          selectedTextStyle={[themeStyles.text, styles.selectedTextStyle]}
           inputSearchStyle={styles.inputSearchStyle}
           search
           maxHeight={300}
@@ -47,9 +54,9 @@ const DropdownFilters = () => {
           data={dropdownStatusVariants}
           value={selectedStatus}
           onChange={(value) => dispatch(setStatus(value.value))}
-          style={styles.dropdown}
+          style={[styles.dropdown, themeStyles.container]}
           placeholderStyle={styles.placeholderStyle}
-          selectedTextStyle={styles.selectedTextStyle}
+          selectedTextStyle={[themeStyles.text, styles.selectedTextStyle]}
           inputSearchStyle={styles.inputSearchStyle}
           search
           maxHeight={300}
@@ -59,10 +66,8 @@ const DropdownFilters = () => {
           searchPlaceholder="Search..."
         />
       </View>
-      <View style={styles.buttonContainer}>
-        <Pressable onPress={handleResetFilters}>
-          <Text>Reset</Text>
-        </Pressable>
+      <View>
+        <Button onPress={handleResetFilters} textButton={"Reset"} />
       </View>
     </View>
   );
@@ -70,41 +75,39 @@ const DropdownFilters = () => {
 
 const styles = StyleSheet.create({
   wrapper: {
+    height: 80,
     flexDirection: "row",
     gap: 4,
     alignItems: "center",
+    padding: styleVariables.gaps.g20,
   },
   dropdownContainer: {
     flex: 1,
-  },
-  buttonContainer: {
-    padding: 3,
+    width: "100%",
   },
   container: {
-    backgroundColor: "white",
     padding: 16,
   },
   dropdown: {
-    height: 50,
-    borderColor: "gray",
+    height: 40,
+    borderColor: styleVariables.colors.bgDark,
     borderWidth: 0.5,
-    borderRadius: 8,
-    paddingHorizontal: 8,
+    borderRadius: styleVariables.borderRadiuses.r15,
+    paddingHorizontal: styleVariables.gaps.g10,
   },
   label: {
     position: "absolute",
-    backgroundColor: "white",
     left: 22,
     top: 8,
     zIndex: 999,
     paddingHorizontal: 8,
-    fontSize: 14,
+    fontSize: styleVariables.fonts.f12,
   },
   placeholderStyle: {
-    fontSize: 16,
+    fontSize: styleVariables.fonts.f12,
   },
   selectedTextStyle: {
-    fontSize: 16,
+    fontSize: styleVariables.fonts.f12,
   },
   iconStyle: {
     width: 20,
@@ -112,7 +115,7 @@ const styles = StyleSheet.create({
   },
   inputSearchStyle: {
     height: 40,
-    fontSize: 16,
+    fontSize: 8,
   },
 });
 

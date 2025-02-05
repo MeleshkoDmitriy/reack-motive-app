@@ -89,5 +89,6 @@ export const CharactersList = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  wrapper: {},
+  wrapper: {
+  },
 });

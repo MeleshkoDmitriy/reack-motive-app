@@ -15,7 +15,7 @@ const themeColors = {
     backgroundWrapper: styleVariables.colors.black,
     backgroundSeparator: styleVariables.colors.black,
     backgroundContainer: styleVariables.colors.secondaryDark,
-    shadowColor: styleVariables.colors.bgDark,
+    shadowColor: styleVariables.colors.secondaryLight,
     title: styleVariables.colors.primary,
     text: styleVariables.colors.secondaryLight,
   },
@@ -35,7 +35,6 @@ export const getThemeStyles = (theme: TThemeMode) => {
       backgroundColor: currentColors.backgroundWrapper,
     },
     separator: {
-      height: 20,
       backgroundColor: currentColors.backgroundSeparator,
     },
     container: {
@@ -50,7 +49,7 @@ export const getThemeStyles = (theme: TThemeMode) => {
             height: 2,
           },
           shadowOpacity: 0.25,
-          shadowRadius: 3.5,
+          shadowRadius: 2.5,
         },
         android: {
           elevation: 5,
