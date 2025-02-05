@@ -1,9 +1,10 @@
-import { Text, View } from "react-native";
+import ThemeSettings from "@/components/ThemeSettings";
+import { View } from "react-native";
 
 export const SettingsScreen = () => {
   return (
     <View>
-      <Text>SettingsScreen</Text>
+      <ThemeSettings />
     </View>
   );
 };
