@@ -12,6 +12,7 @@ import { CharacterCard } from "../cards/CharacterCard";
 import { TCharacter } from "@/types/CharacterTypes";
 import { useAppSelector } from "@/hooks/reduxHooks";
 import { selectSpecies, selectStatus } from "@/store/slices/filterSlice";
+import { CharacterSeparator } from "../separators/CharacterSeparator";
 
 export const CharactersList = ({ navigation }) => {
   const [page, setPage] = useState<number>(1);
@@ -81,6 +82,7 @@ export const CharactersList = ({ navigation }) => {
         ListFooterComponent={
           isCharactersFetching ? <ActivityIndicator /> : null
         }
+        ItemSeparatorComponent={CharacterSeparator}
       />
     </View>
   );

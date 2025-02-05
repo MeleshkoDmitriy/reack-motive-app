@@ -1,15 +1,17 @@
 import { useAppSelector } from "@/hooks/reduxHooks";
 import { selectTheme } from "@/store/slices/themeSlice";
 import { getThemeStyles } from "@/styles/themeStyles"
-import { Image, Pressable, Text, View } from "react-native"
+import { styleVariables } from "@/styles/variables";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native"
 
 export const CharacterCard = ({ item, onPress }) => {
   const selectedTheme = useAppSelector(selectTheme);
   const themeStyles = getThemeStyles(selectedTheme);
 
   return (
-    <Pressable onPress={onPress} style={themeStyles.container}>
-      <View>
+    <View style={[themeStyles.container, styles.container]}>
+    <Pressable onPress={onPress}>
+      <View style={styles.content}>
         <Image
           style={{ width: 100, height: 100 }}
           source={{ uri: item.image }}
@@ -19,5 +21,15 @@ export const CharacterCard = ({ item, onPress }) => {
         <Text style={themeStyles.text}>{item.status}</Text>
       </View>
     </Pressable>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    overflow: 'hidden',
+  },
+  content: {
+    padding: styleVariables.gaps.g20
+  },
+})
