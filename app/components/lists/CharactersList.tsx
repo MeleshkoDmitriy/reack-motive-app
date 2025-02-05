@@ -10,10 +10,15 @@ import {
 } from "react-native";
 import { CharacterCard } from "../cards/CharacterCard";
 import { TCharacter } from "@/types/CharacterTypes";
+import { useAppSelector } from "@/hooks/reduxHooks";
+import { selectSpecies, selectStatus } from "@/store/slices/filterSlice";
 
 export const CharactersList = ({ navigation }) => {
   const [page, setPage] = useState<number>(1);
   const [characters, setCharacters] = useState<TCharacter[]>([]);
+
+  const selectedSpecies = useAppSelector(selectSpecies);
+  const selectedStatus = useAppSelector(selectStatus);
 
   const {
     data: charactersData,
@@ -22,9 +27,14 @@ export const CharactersList = ({ navigation }) => {
     isFetching: isCharactersFetching,
   } = useGetCharactersQuery({
     page,
-    species: "all",
-    status: "all",
+    species: selectedSpecies,
+    status: selectedStatus,
   });
+
+  useEffect(() => {
+    setPage(1);
+    setCharacters([]);
+  }, [selectedSpecies, selectedStatus]);
 
   useEffect(() => {
     if (charactersData && charactersData.results) {
@@ -46,7 +56,7 @@ export const CharactersList = ({ navigation }) => {
   }, [isCharactersLoading, isCharactersFetching, charactersData]);
 
   if (isCharactersLoading && characters.length === 0) {
-    return <ActivityIndicator size="large" color="#0000ff" />;
+    return <ActivityIndicator />;
   }
 
   if (charactersError) {

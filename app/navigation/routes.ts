@@ -1,9 +1,9 @@
 export const routesStack = {
-  CHARACTERS: "Characters",
-  PROFILE: "Profile",
+  CHARACTERS: "CharactersScreen",
+  PROFILE: "ProfileScreen",
 };
 
 export const routesTabs = {
-  CHARACTERS: "CharactersTab",
-  SETTINGS: "SettingsTab",
+  CHARACTERS: "Characters",
+  SETTINGS: "Settings",
 };
