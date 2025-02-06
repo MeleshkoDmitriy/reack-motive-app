@@ -59,6 +59,7 @@ export const getThemeStyles = (theme: TThemeMode) => {
     title: {
       color: currentColors.title,
       fontSize: styleVariables.fonts.f20,
+      fontWeight: "bold",
     },
     text: {
       color: currentColors.text,

@@ -4,6 +4,7 @@ export type TCharacterStatus = "Alive" | "Dead" | "unknown";
 export type TFilterCharacterStatus = TCharacterStatus | "all";
 export type TCharacterGender = "Male" | "Female" | "Genderless" | "unknown";
 
+
 interface Location {
   name: string;
   url: string;
@@ -13,7 +14,7 @@ export type TCharacter = {
   id: number;
   name: string;
   status: TCharacterStatus;
-  species: string;
+  species: TCharacterSpecies;
   type: string;
   gender: TCharacterGender;
   origin: Location;

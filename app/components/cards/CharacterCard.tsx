@@ -1,24 +1,50 @@
 import { useAppTheme } from "@/hooks/useAppTheme";
 import { styleVariables } from "@/styles/variables";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { IdentityIndicator } from "../IdentityIndicator";
+import { TCharacter } from "@/types/CharacterTypes";
+import { FC } from "react";
 
-export const CharacterCard = ({ item, onPress }) => {
+interface CharacterCardProps {
+  item: TCharacter
+  onPress: () => void;
+}
+
+export const CharacterCard: FC<CharacterCardProps> = ({ item, onPress }) => {
   const themeStyles = useAppTheme();
 
   return (
     <View style={[themeStyles.container, styles.container]}>
-      <Pressable onPress={onPress}>
+      <TouchableOpacity onPress={onPress}>
         <View style={styles.content}>
           <View style={styles.imageWrapper}>
             <Image style={styles.image} source={{ uri: item.image }} />
           </View>
           <View style={styles.detailsWrapper}>
-            <Text style={themeStyles.title}>{item.name}</Text>
-            <Text style={themeStyles.text}>{item.species}</Text>
-            <Text style={themeStyles.text}>{item.status}</Text>
+            <View style={styles.details}>
+              <Text style={themeStyles.title}>{item.name}</Text>
+            </View>
+            <View style={styles.details}>
+              <IdentityIndicator info={item.species} />
+              <Text style={themeStyles.text}>{item.species}</Text>
+            </View>
+            <View style={styles.details}>
+              <IdentityIndicator info={item.status} />
+              <Text style={themeStyles.text}>{item.status}</Text>
+            </View>
+            <View style={styles.details}>
+              <IdentityIndicator info={item.gender} />
+              <Text style={themeStyles.text}>{item.gender}</Text>
+            </View>
           </View>
         </View>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -38,7 +64,7 @@ const styles = StyleSheet.create({
   imageWrapper: {
     flex: 1,
     overflow: "hidden",
-    borderRadius: styleVariables.borderRadiuses.r15,
+    borderRadius: styleVariables.borderRadiuses.rCircle,
   },
   image: {
     aspectRatio: 1,
@@ -46,5 +72,11 @@ const styles = StyleSheet.create({
   },
   detailsWrapper: {
     flex: 1,
+    gap: styleVariables.gaps.g10,
+  },
+  details: {
+    flexDirection: "row",
+    alignItems: 'center',
+    gap: styleVariables.gaps.g10,
   },
 });

@@ -2,22 +2,22 @@ import { TThemeMode } from "@/types/ThemeTypes";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const loadThemeFromStorage = createAsyncThunk(
-  "theme/loadThemeFromStorage",
-  async () => {
-    try {
-      const savedTheme = await AsyncStorage.getItem("themeMode");
-      if (savedTheme) {
-        return savedTheme as TThemeMode;
-      }
-
-      return "light";
-    } catch (error) {
-      console.error("Failed to load theme from AsyncStorage", error);
-      return "light";
+export const loadThemeFromStorage = createAsyncThunk<
+  TThemeMode,
+  undefined,
+  { rejectValue: string }
+>("theme/loadThemeFromStorage", async (_, { rejectWithValue }) => {
+  try {
+    const savedTheme = await AsyncStorage.getItem("themeMode");
+    if (savedTheme) {
+      return savedTheme as TThemeMode;
     }
+    return "light";
+  } catch (error) {
+    console.error("Failed to load theme from AsyncStorage", error);
+    return rejectWithValue("Failed to load theme");
   }
-);
+});
 
 interface IInitialState {
   themeMode: TThemeMode;

@@ -6,5 +6,5 @@ export const useAppTheme = () => {
   const selectedTheme = useAppSelector(selectTheme);
   const themeStyles = getThemeStyles(selectedTheme);
 
-  return themeStyles
+  return themeStyles;
 };
