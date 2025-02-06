@@ -17,14 +17,14 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { Button } from "./shared/buttons/Button";
+import { useAppTheme } from "@/hooks/useAppTheme";
 
 const DropdownFilters = () => {
   const dispatch = useAppDispatch();
   const selectedSpecies = useAppSelector(selectSpecies);
   const selectedStatus = useAppSelector(selectStatus);
 
-  const selectedTheme = useAppSelector(selectTheme);
-  const themeStyles = getThemeStyles(selectedTheme);
+  const themeStyles = useAppTheme();
 
   const handleResetFilters = () => {
     dispatch(resetFilters());

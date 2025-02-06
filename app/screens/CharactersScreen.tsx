@@ -1,15 +1,14 @@
 import DropdownFilters from "@/components/DropdownFilters";
 import { CharactersList } from "@/components/lists/CharactersList";
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { useAppDispatch } from "@/hooks/reduxHooks";
+import { useAppTheme } from "@/hooks/useAppTheme";
 import { loadThemeFromStorage, selectTheme } from "@/store/slices/themeSlice";
-import { getThemeStyles } from "@/styles/themeStyles";
 import { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 
 export const CharactersScreen = ({ navigation }) => {
   const dispatch = useAppDispatch();
-  const selectedTheme = useAppSelector(selectTheme);
-  const themeStyles = getThemeStyles(selectedTheme);
+  const themeStyles = useAppTheme();
 
   useEffect(() => {
     const initializeTheme = async () => {

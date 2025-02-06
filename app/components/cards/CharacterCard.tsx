@@ -1,12 +1,9 @@
-import { useAppSelector } from "@/hooks/reduxHooks";
-import { selectTheme } from "@/store/slices/themeSlice";
-import { getThemeStyles } from "@/styles/themeStyles";
+import { useAppTheme } from "@/hooks/useAppTheme";
 import { styleVariables } from "@/styles/variables";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 export const CharacterCard = ({ item, onPress }) => {
-  const selectedTheme = useAppSelector(selectTheme);
-  const themeStyles = getThemeStyles(selectedTheme);
+  const themeStyles = useAppTheme();
 
   return (
     <View style={[themeStyles.container, styles.container]}>

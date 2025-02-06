@@ -1,12 +1,9 @@
 import ThemeSettings from "@/components/ThemeSettings";
-import { useAppSelector } from "@/hooks/reduxHooks";
-import { selectTheme } from "@/store/slices/themeSlice";
-import { getThemeStyles } from "@/styles/themeStyles";
+import { useAppTheme } from "@/hooks/useAppTheme";
 import { View } from "react-native";
 
 export const SettingsScreen = () => {
-  const selectedTheme = useAppSelector(selectTheme);
-  const themeStyles = getThemeStyles(selectedTheme);
+  const themeStyles = useAppTheme();
 
   return (
     <View style={themeStyles.wrapper}>

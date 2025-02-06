@@ -1,12 +1,9 @@
-import { useAppSelector } from "@/hooks/reduxHooks";
-import { selectTheme } from "@/store/slices/themeSlice";
-import { getThemeStyles } from "@/styles/themeStyles";
+import { useAppTheme } from "@/hooks/useAppTheme";
 import { styleVariables } from "@/styles/variables";
 import { StyleSheet, View } from "react-native";
 
 export const CharacterSeparator = () => {
-  const selectedTheme = useAppSelector(selectTheme);
-  const themeStyles = getThemeStyles(selectedTheme);
+  const themeStyles = useAppTheme();
 
   return <View style={[themeStyles.separator, styles.separator]}></View>;
 };

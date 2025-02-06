@@ -1,13 +1,10 @@
-import { useAppSelector } from "@/hooks/reduxHooks";
-import { selectTheme } from "@/store/slices/themeSlice";
-import { getThemeStyles } from "@/styles/themeStyles";
+import { useAppTheme } from "@/hooks/useAppTheme";
 import { Image, Text, View } from "react-native";
 
 export const CharacterProfile = ({ character }) => {
   const { name, image } = character;
 
-  const selectedTheme = useAppSelector(selectTheme);
-  const themeStyles = getThemeStyles(selectedTheme);
+  const themeStyles = useAppTheme();
 
   return (
     <View style={themeStyles.container}>
