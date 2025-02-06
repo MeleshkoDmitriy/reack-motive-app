@@ -1,4 +1,3 @@
-import { styleVariables } from "@/styles/variables";
 import { FC } from "react";
 import { StyleSheet, SafeAreaView, Platform, StatusBar } from "react-native";
 
@@ -9,9 +8,7 @@ interface AppSafeAreaViewProps {
 export const AppSafeAriaView: FC<AppSafeAreaViewProps> = ({ children }) => {
   return (
     <>
-      <StatusBar
-        barStyle="dark-content"
-      />
+      <StatusBar barStyle="light-content" />
       <SafeAreaView style={[styles.wrapper]}>{children}</SafeAreaView>
     </>
   );

@@ -10,8 +10,6 @@ import {
   setSpecies,
   setStatus,
 } from "@/store/slices/filterSlice";
-import { selectTheme } from "@/store/slices/themeSlice";
-import { getThemeStyles } from "@/styles/themeStyles";
 import { styleVariables } from "@/styles/variables";
 import React from "react";
 import { StyleSheet, View } from "react-native";

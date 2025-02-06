@@ -42,7 +42,7 @@ const ThemeSettings = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    alignItems: 'center',
+    alignItems: "center",
     justifyContent: "center",
     gap: styleVariables.gaps.g20,
     height: 50,
@@ -52,6 +52,6 @@ const styles = StyleSheet.create({
     fontSize: styleVariables.fonts.f20,
     fontWeight: "bold",
   },
-})
+});
 
 export default React.memo(ThemeSettings);

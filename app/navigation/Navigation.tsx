@@ -7,8 +7,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { SettingsScreen } from "@/screens/SettingsScreen";
 import { TProfileParams } from "@/types/ProfileScreenTypes";
 import { styleVariables } from "@/styles/variables";
-import Fontisto from "@expo/vector-icons/Fontisto";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { Ionicons } from "@expo/vector-icons";
+import { tabsStyles } from "@/styles/styles";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,10 +26,7 @@ const CharacterStack = () => (
         const { name } = route.params as TProfileParams;
         return {
           title: name || "Character Profile",
-          headerStyle: {
-            backgroundColor: styleVariables.colors.secondaryDark,
-          },
-          headerTintColor: styleVariables.colors.white,
+          headerTintColor: styleVariables.colors.primary,
           headerTitleStyle: {
             color: styleVariables.colors.primary,
             fontWeight: "bold",
@@ -61,11 +58,11 @@ export const Navigation = () => {
           component={CharacterStack}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <Fontisto
-                name="persons"
+              <Ionicons
+                name="people"
                 size={size}
                 color={color}
-                style={{ marginTop: 15, paddingBottom: 30 }}
+                style={tabsStyles}
               />
             ),
           }}
@@ -79,7 +76,7 @@ export const Navigation = () => {
                 name="settings"
                 size={size}
                 color={color}
-                style={{ marginTop: 15, paddingBottom: 30 }}
+                style={tabsStyles}
               />
             ),
           }}
