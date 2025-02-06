@@ -1,5 +1,7 @@
+import { styleVariables } from "@/styles/variables";
+import { StatusBar } from "expo-status-bar";
 import { FC } from "react";
-import { StyleSheet, SafeAreaView, Platform, StatusBar } from "react-native";
+import { StyleSheet, SafeAreaView, Platform } from "react-native";
 
 interface AppSafeAreaViewProps {
   children: React.ReactNode;
@@ -8,7 +10,7 @@ interface AppSafeAreaViewProps {
 export const AppSafeAriaView: FC<AppSafeAreaViewProps> = ({ children }) => {
   return (
     <>
-      <StatusBar barStyle="light-content" />
+      <StatusBar backgroundColor={styleVariables.colors.primary} />
       <SafeAreaView style={[styles.wrapper]}>{children}</SafeAreaView>
     </>
   );

@@ -5,10 +5,15 @@ import { CharactersScreen } from "@/screens/CharactersScreen";
 import { ProfileScreen } from "@/screens/ProfileScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { SettingsScreen } from "@/screens/SettingsScreen";
-import { TProfileParams } from "@/types/ProfileScreenTypes";
 import { styleVariables } from "@/styles/variables";
 import { Ionicons } from "@expo/vector-icons";
 import { tabsStyles } from "@/styles/styles";
+import { TCharacter } from "@/types/CharacterTypes";
+
+export type CharacterStackParamList = {
+  CHARACTERS: undefined; 
+  PROFILE: TCharacter;
+};
 
 const Stack = createNativeStackNavigator();
 
@@ -23,13 +28,16 @@ const CharacterStack = () => (
       name={routesStack.PROFILE}
       component={ProfileScreen}
       options={({ route }) => {
-        const { name } = route.params as TProfileParams;
+        const { name } = route.params as TCharacter;
         return {
           title: name || "Character Profile",
-          headerTintColor: styleVariables.colors.primary,
+          headerTintColor: styleVariables.colors.white,
           headerTitleStyle: {
-            color: styleVariables.colors.primary,
+            color: styleVariables.colors.white,
             fontWeight: "bold",
+          },
+          headerStyle: {
+            backgroundColor: styleVariables.colors.primary,
           },
         };
       }}
@@ -45,11 +53,19 @@ export const Navigation = () => {
       <Tab.Navigator
         screenOptions={{
           tabBarShowLabel: false,
-          tabBarActiveTintColor: styleVariables.colors.primary,
+          tabBarActiveTintColor: styleVariables.colors.white,
           tabBarInactiveTintColor: styleVariables.colors.secondaryDark,
           tabBarStyle: {
-            backgroundColor: styleVariables.colors.secondaryLight,
+            backgroundColor: styleVariables.colors.primary,
             borderTopColor: styleVariables.colors.primary,
+          },
+          headerTitleStyle: {
+            fontWeight: "bold",
+            color: styleVariables.colors.white,
+            fontSize: 20,
+          },
+          headerStyle: {
+            backgroundColor: styleVariables.colors.primary,
           },
         }}
       >

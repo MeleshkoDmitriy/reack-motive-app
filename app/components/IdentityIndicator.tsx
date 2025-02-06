@@ -3,16 +3,19 @@ import { TIdentityIndicator } from "@/types/IdentityIndicatorTypes";
 import { getIdentityIndicatorColor } from "@/utils/getIdentityIndicatorColor";
 import { StyleSheet, View } from "react-native";
 
-
 interface IdentityIndicatorProps {
   info: TIdentityIndicator;
 }
 
-export const IdentityIndicator: React.FC<IdentityIndicatorProps> = ({info}) => {
+export const IdentityIndicator: React.FC<IdentityIndicatorProps> = ({
+  info,
+}) => {
   const infoColor = getIdentityIndicatorColor(info);
 
   return (
-    <View style={[styles.identityIndicator, { backgroundColor: infoColor }]}></View>
+    <View
+      style={[styles.identityIndicator, { backgroundColor: infoColor }]}
+    ></View>
   );
 };
 

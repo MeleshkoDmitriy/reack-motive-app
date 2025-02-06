@@ -2,14 +2,7 @@ import { useAppTheme } from "@/hooks/useAppTheme";
 import { styleVariables } from "@/styles/variables";
 import { TCharacter } from "@/types/CharacterTypes";
 import { FC } from "react";
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  useWindowDimensions,
-  View,
-} from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { IdentityIndicator } from "./IdentityIndicator";
 import { parseISO, format } from "date-fns";
 
@@ -18,8 +11,6 @@ interface CharacterProfileProps {
 }
 
 export const CharacterProfile: FC<CharacterProfileProps> = ({ character }) => {
-  const { width } = useWindowDimensions();
-
   const {
     name,
     image,
@@ -45,36 +36,36 @@ export const CharacterProfile: FC<CharacterProfileProps> = ({ character }) => {
       </View>
       <View style={styles.content}>
         <View style={styles.imageWrapper}>
-          <Image
-            style={[styles.image, { width: width / 2 }]}
-            source={{ uri: image }}
-          />
+          <Image style={[styles.image]} source={{ uri: image }} />
         </View>
+      </View>
+      <View style={styles.footer}>
         <View style={styles.detailsWrapper}>
           <View style={styles.details}>
+            <Text style={styles.subtitle}>Species</Text>
             <IdentityIndicator info={species} />
             <Text style={themeStyles.text}>{species}</Text>
           </View>
           <View style={styles.details}>
+            <Text style={styles.subtitle}>Status</Text>
             <IdentityIndicator info={status} />
             <Text style={themeStyles.text}>{status}</Text>
           </View>
           <View style={styles.details}>
+            <Text style={styles.subtitle}>Gender</Text>
             <IdentityIndicator info={gender} />
             <Text style={themeStyles.text}>{gender}</Text>
           </View>
         </View>
-      </View>
-      <View style={styles.footer}>
         <Text style={themeStyles.text}>
-          <Text style={styles.subtitle}>Created:</Text>{' '}{formattedDate}
+          <Text style={styles.subtitle}>Created:</Text> {formattedDate}
         </Text>
         <Text style={themeStyles.text}>
-          <Text style={styles.subtitle}>Origin:</Text>{' '}
+          <Text style={styles.subtitle}>Origin:</Text>{" "}
           {origin?.name || "Unknown"}
         </Text>
         <Text style={themeStyles.text}>
-          <Text style={styles.subtitle}>Location:</Text>{' '}
+          <Text style={styles.subtitle}>Location:</Text>{" "}
           {location?.name || "Unknown"}
         </Text>
         {type && (
@@ -106,6 +97,7 @@ const styles = StyleSheet.create({
   container: {
     padding: styleVariables.gaps.g20,
     gap: styleVariables.gaps.g20,
+    borderRadius: 0,
   },
   header: {
     marginBottom: styleVariables.gaps.g20,
@@ -121,6 +113,7 @@ const styles = StyleSheet.create({
     borderRadius: styleVariables.borderRadiuses.r15,
   },
   image: {
+    width: "100%",
     aspectRatio: 1,
   },
   detailsWrapper: {
@@ -130,7 +123,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: styleVariables.gaps.g10,
-    marginBottom: styleVariables.gaps.g10,
   },
   footer: {},
   subtitle: {

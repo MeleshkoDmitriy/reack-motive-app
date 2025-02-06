@@ -9,8 +9,16 @@ import { OfflineStatus } from "../statuses/OfflineStatus";
 import { useCharacters } from "@/hooks/useCharacters";
 import { ErrorStatus } from "../statuses/ErrorStatus";
 import { EmptyList } from "./EmptyList";
+import { FooterList } from "./FooterList";
+import { FC } from "react";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { CharacterStackParamList } from "@/navigation/Navigation";
 
-export const CharactersList = ({ navigation }) => {
+interface CharactersListProps {
+  navigation: StackNavigationProp<CharacterStackParamList, "CHARACTERS">;
+}
+
+export const CharactersList: FC<CharactersListProps> = ({ navigation }) => {
   const selectedSpecies = useAppSelector(selectSpecies);
   const selectedStatus = useAppSelector(selectStatus);
 
@@ -42,14 +50,12 @@ export const CharactersList = ({ navigation }) => {
           renderItem={({ item }) => (
             <CharacterCard
               item={item}
-              onPress={() =>
-                navigation.navigate(routesStack.PROFILE, { ...item })
-              }
+              onPress={() => navigation.navigate(routesStack.PROFILE, item)}
             />
           )}
           onEndReached={loadMoreCharacters}
           onEndReachedThreshold={0.5}
-          ListFooterComponent={isFetching ? <Spinner /> : null}
+          ListFooterComponent={isFetching ? <Spinner /> : <FooterList />}
           ItemSeparatorComponent={CharacterSeparator}
           ListEmptyComponent={EmptyList}
         />
@@ -62,20 +68,17 @@ export const CharactersList = ({ navigation }) => {
             renderItem={({ item }) => (
               <CharacterCard
                 item={item}
-                onPress={() =>
-                  navigation.navigate(routesStack.PROFILE, { ...item })
-                }
+                onPress={() => navigation.navigate(routesStack.PROFILE, item)}
               />
             )}
             onEndReached={loadMoreCharacters}
             onEndReachedThreshold={0.5}
-            ListFooterComponent={isFetching ? <Spinner /> : null}
+            ListFooterComponent={isFetching ? <Spinner /> : <FooterList />}
             ItemSeparatorComponent={CharacterSeparator}
             ListEmptyComponent={EmptyList}
           />
         </>
       )}
-      
     </View>
   );
 };

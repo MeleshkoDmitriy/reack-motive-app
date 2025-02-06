@@ -1,7 +1,13 @@
 import { styleVariables } from "@/styles/variables";
+import { FC } from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
 
-export const Button = ({ onPress, textButton }) => {
+interface ButtonProps {
+  onPress: () => void;
+  textButton: string;
+}
+
+export const Button: FC<ButtonProps> = ({ onPress, textButton }) => {
   return (
     <Pressable style={styles.button} onPress={onPress}>
       <Text style={styles.text}>{textButton}</Text>

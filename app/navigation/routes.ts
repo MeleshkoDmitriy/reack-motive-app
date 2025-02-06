@@ -4,6 +4,6 @@ export const routesStack = {
 };
 
 export const routesTabs = {
-  CHARACTERS: "Characters",
+  CHARACTERS: "Main",
   SETTINGS: "Settings",
 };

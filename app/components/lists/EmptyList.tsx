@@ -7,7 +7,7 @@ export const EmptyList = () => {
 
   return (
     <View style={[themeStyles.container, styles.container]}>
-      <Text style={themeStyles.title}>No results!</Text>
+      <Text style={themeStyles.title}>No results yet..</Text>
     </View>
   );
 };

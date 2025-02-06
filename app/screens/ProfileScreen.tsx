@@ -1,9 +1,14 @@
 import { CharacterProfile } from "@/components/CharacterProfile";
 import { useAppTheme } from "@/hooks/useAppTheme";
-import React from "react";
+import { CharacterStackParamList } from "@/navigation/Navigation";
+import { RouteProp } from "@react-navigation/core";
+import React, { FC } from "react";
 import { View } from "react-native";
 
-export const ProfileScreen = ({ route }) => {
+interface ProfileScreenProps {
+  route: RouteProp<CharacterStackParamList, 'PROFILE'>;
+}
+export const ProfileScreen: FC<ProfileScreenProps> = ({ route }) => {
   const themeStyles = useAppTheme();
 
   return (
