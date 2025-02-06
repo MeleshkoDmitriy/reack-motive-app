@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     gap: styleVariables.gaps.g20,
     height: 50,
+    borderRadius: 0,
   },
   text: {
     fontSize: styleVariables.fonts.f20,
