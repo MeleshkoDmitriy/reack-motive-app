@@ -64,11 +64,13 @@ const styles = StyleSheet.create({
   imageWrapper: {
     flex: 1,
     overflow: "hidden",
+    aspectRatio: 1,
     borderRadius: styleVariables.borderRadiuses.rCircle,
   },
   image: {
+    width: "100%",
     aspectRatio: 1,
-    borderRadius: styleVariables.borderRadiuses.r15,
+    objectFit: 'cover',    
   },
   detailsWrapper: {
     flex: 1,
