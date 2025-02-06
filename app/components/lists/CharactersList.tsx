@@ -2,7 +2,6 @@ import { routesStack } from "@/navigation/routes";
 import { useGetCharactersQuery } from "@/store/slices/api/characterApi";
 import { useCallback, useEffect, useState } from "react";
 import {
-  ActivityIndicator,
   FlatList,
   StyleSheet,
   Text,
@@ -13,6 +12,7 @@ import { TCharacter } from "@/types/CharacterTypes";
 import { useAppSelector } from "@/hooks/reduxHooks";
 import { selectSpecies, selectStatus } from "@/store/slices/filterSlice";
 import { CharacterSeparator } from "../separators/CharacterSeparator";
+import { Spinner } from "../shared/spinners/Spinner";
 
 export const CharactersList = ({ navigation }) => {
   const [page, setPage] = useState<number>(1);
@@ -57,7 +57,7 @@ export const CharactersList = ({ navigation }) => {
   }, [isCharactersLoading, isCharactersFetching, charactersData]);
 
   if (isCharactersLoading && characters.length === 0) {
-    return <ActivityIndicator />;
+    return <Spinner />;
   }
 
   if (charactersError) {
@@ -65,7 +65,7 @@ export const CharactersList = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.wrapper}>
+    <View>
       <FlatList
         data={characters}
         keyExtractor={(item) => item.id.toString()}
@@ -80,7 +80,7 @@ export const CharactersList = ({ navigation }) => {
         onEndReached={loadMoreCharacters}
         onEndReachedThreshold={0.5}
         ListFooterComponent={
-          isCharactersFetching ? <ActivityIndicator /> : null
+          isCharactersFetching ? <Spinner /> : null
         }
         ItemSeparatorComponent={CharacterSeparator}
       />
@@ -88,7 +88,3 @@ export const CharactersList = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  wrapper: {
-  },
-});
