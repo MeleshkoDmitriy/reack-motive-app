@@ -125,7 +125,6 @@ const styles = StyleSheet.create({
   },
   detailsWrapper: {
     flex: 1,
-    gap: styleVariables.gaps.g10,
   },
   details: {
     flexDirection: "row",

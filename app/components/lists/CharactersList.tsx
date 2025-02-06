@@ -8,6 +8,7 @@ import { Spinner } from "../shared/spinners/Spinner";
 import { OfflineStatus } from "../statuses/OfflineStatus";
 import { useCharacters } from "@/hooks/useCharacters";
 import { ErrorStatus } from "../statuses/ErrorStatus";
+import { EmptyList } from "./EmptyList";
 
 export const CharactersList = ({ navigation }) => {
   const selectedSpecies = useAppSelector(selectSpecies);
@@ -50,6 +51,7 @@ export const CharactersList = ({ navigation }) => {
           onEndReachedThreshold={0.5}
           ListFooterComponent={isFetching ? <Spinner /> : null}
           ItemSeparatorComponent={CharacterSeparator}
+          ListEmptyComponent={EmptyList}
         />
       ) : (
         <>
@@ -69,6 +71,7 @@ export const CharactersList = ({ navigation }) => {
             onEndReachedThreshold={0.5}
             ListFooterComponent={isFetching ? <Spinner /> : null}
             ItemSeparatorComponent={CharacterSeparator}
+            ListEmptyComponent={EmptyList}
           />
         </>
       )}
