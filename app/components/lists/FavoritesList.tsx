@@ -10,7 +10,8 @@ import { useFavorites } from "@/hooks/useFavorites";
 
 export const FavoritesList = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const { data, refetch, isFetching, isLoading, error } = useFavorites("");
+  const { data, refetch, isFetching, isLoading, error, defineLike } =
+    useFavorites();
 
   const handleRefresh = useCallback(async () => {
     setIsRefreshing(true);
@@ -40,9 +41,7 @@ export const FavoritesList = () => {
         data={data}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <FavoriteCard
-            item={item}
-          />
+          <FavoriteCard item={item} isLiked={defineLike(item.id)} />
         )}
         refreshing={isRefreshing}
         onRefresh={handleRefresh}

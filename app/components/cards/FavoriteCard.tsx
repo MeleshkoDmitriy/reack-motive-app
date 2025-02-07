@@ -3,23 +3,33 @@ import { styleVariables } from "@/styles/variables";
 import { TFavorite } from "@/types/FavoritesTypes";
 import { FC } from "react";
 import { StyleSheet } from "react-native";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, TouchableOpacity, View } from "react-native";
+import { IdentityIndicator } from "../IdentityIndicator";
+import { TCharacter } from "@/types/CharacterTypes";
+import { LikeButton } from "../shared/buttons/LikeButton/LikeButton";
 
 interface FavoriteCardProps {
-  item: TFavorite;
+  item: TFavorite | TCharacter;
+  isLiked: boolean;
 }
 
-export const FavoriteCard: FC<FavoriteCardProps> = ({ item }) => {
+export const FavoriteCard: FC<FavoriteCardProps> = ({ item, isLiked }) => {
   const themeStyles = useAppTheme();
 
   return (
     <View style={[themeStyles.container, styles.container]}>
-      <TouchableOpacity
-      // onPress={onPress}
-      >
+      <TouchableOpacity>
         <View style={styles.content}>
           <View style={styles.imageWrapper}>
             <Image style={styles.image} source={{ uri: item.image }} />
+          </View>
+          <View style={styles.indicators}>
+            <IdentityIndicator info={item.gender} />
+            <IdentityIndicator info={item.status} />
+            <IdentityIndicator info={item.species} />
+          </View>
+          <View style={styles.like}>
+            <LikeButton item={item} isLiked={isLiked} />
           </View>
         </View>
       </TouchableOpacity>
@@ -29,34 +39,34 @@ export const FavoriteCard: FC<FavoriteCardProps> = ({ item }) => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     overflow: "hidden",
-    marginHorizontal: styleVariables.gaps.g20,
-    marginBottom: styleVariables.gaps.g10,
+    marginHorizontal: styleVariables.gaps.g10,
+    marginBottom: styleVariables.gaps.g20,
+    padding: styleVariables.gaps.g10,
   },
   content: {
     flexDirection: "row",
-    gap: styleVariables.gaps.g20,
-    justifyContent: "flex-start",
-    padding: styleVariables.gaps.g20,
+    justifyContent: "space-between",
+    gap: styleVariables.gaps.g10,
+    alignItems: "center",
   },
   imageWrapper: {
-    flex: 1,
     overflow: "hidden",
     aspectRatio: 1,
+    height: 50,
     borderRadius: styleVariables.borderRadiuses.rCircle,
   },
   image: {
     width: "100%",
-    aspectRatio: 1,
+    height: "100%",
     objectFit: "cover",
   },
-  detailsWrapper: {
-    flex: 1,
-    gap: styleVariables.gaps.g10,
-  },
-  details: {
+  indicators: {
     flexDirection: "row",
-    alignItems: "center",
+    justifyContent: "flex-end",
+    alignItems: "stretch",
     gap: styleVariables.gaps.g10,
   },
+  like: {},
 });

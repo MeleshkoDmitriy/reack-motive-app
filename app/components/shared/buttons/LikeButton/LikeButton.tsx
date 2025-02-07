@@ -1,4 +1,7 @@
-import { useFavorites } from "@/hooks/useFavorites";
+import {
+  useAddFavoriteMutation,
+  useDeleteFavoriteMutation,
+} from "@/store/slices/api/favoritesApi";
 import { styleVariables } from "@/styles/variables";
 import { TCharacter } from "@/types/CharacterTypes";
 import { TFavorite } from "@/types/FavoritesTypes";
@@ -7,12 +10,13 @@ import { FC } from "react";
 import { TouchableOpacity } from "react-native";
 
 interface LikeButtonProps {
-  item: TCharacter;
+  item: TCharacter | TFavorite;
   isLiked: boolean;
 }
 
 export const LikeButton: FC<LikeButtonProps> = ({ item, isLiked }) => {
-  const { addFavorite, deleteFavorite } = useFavorites();
+  const [addFavorite] = useAddFavoriteMutation();
+  const [deleteFavorite] = useDeleteFavoriteMutation();
 
   const handleFavoriteToggle = async () => {
     const favorite: TFavorite = {
@@ -26,7 +30,7 @@ export const LikeButton: FC<LikeButtonProps> = ({ item, isLiked }) => {
 
     try {
       if (isLiked) {
-        await deleteFavorite(favorite.id.toString());
+        await deleteFavorite(item.id);
       } else {
         await addFavorite(favorite);
       }
@@ -49,4 +53,3 @@ export const LikeButton: FC<LikeButtonProps> = ({ item, isLiked }) => {
     </TouchableOpacity>
   );
 };
-

@@ -1,5 +1,9 @@
 import { useLazyGetCharacterByIdQuery } from "@/store/slices/api/characterApi";
-import { useAddFavoriteMutation, useDeleteFavoriteMutation, useGetFavoritesQuery } from "@/store/slices/api/favoritesApi";
+import {
+  useAddFavoriteMutation,
+  useDeleteFavoriteMutation,
+  useGetFavoritesQuery,
+} from "@/store/slices/api/favoritesApi";
 
 export const useFavorites = (searchString: string = "") => {
   const { data, isLoading, isFetching, error, refetch } = useGetFavoritesQuery(
@@ -7,6 +11,7 @@ export const useFavorites = (searchString: string = "") => {
     {
       refetchOnFocus: true,
       refetchOnMountOrArgChange: true,
+      // pollingInterval: 20000,
     }
   );
   const [addFavorite] = useAddFavoriteMutation();

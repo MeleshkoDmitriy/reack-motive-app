@@ -22,7 +22,7 @@ export const favoritesApi = createApi({
       }),
       invalidatesTags: ["favorites"],
     }),
-    deleteFavorite: builder.mutation<void, string>({
+    deleteFavorite: builder.mutation<void, number>({
       query: (id) => ({
         url: `/${id}`,
         method: "DELETE",
