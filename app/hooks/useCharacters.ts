@@ -8,7 +8,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import NetInfo from "@react-native-community/netinfo";
 import { useOnline } from "./useOnline";
-import { useGetFavoritesQuery } from "@/store/slices/api/favoritesApi";
 
 export const useCharacters = (
   selectedSpecies: TFilterCharacterSpecies,

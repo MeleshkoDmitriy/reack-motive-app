@@ -4,7 +4,9 @@ import { TCharacter } from "@/types/CharacterTypes";
 import { FC } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { IdentityIndicator } from "./IdentityIndicator";
-import { parseISO, format } from "date-fns";
+import { getFormattedDate } from "@/utils/getFormattedDate";
+import { LikeButton } from "./shared/buttons/LikeButton/LikeButton";
+import { useFavorites } from "@/hooks/useFavorites";
 
 interface CharacterProfileProps {
   character: TCharacter;
@@ -12,6 +14,7 @@ interface CharacterProfileProps {
 
 export const CharacterProfile: FC<CharacterProfileProps> = ({ character }) => {
   const {
+    id,
     name,
     image,
     created,
@@ -25,14 +28,15 @@ export const CharacterProfile: FC<CharacterProfileProps> = ({ character }) => {
     url,
   } = character;
 
-  const date = parseISO(created);
-  const formattedDate = format(date, "dd MMMM yyyy, HH:mm:ss");
+  const formattedDate = getFormattedDate(created);
   const themeStyles = useAppTheme();
+  const { defineLike } = useFavorites();
 
   return (
     <ScrollView style={[themeStyles.container, styles.container]}>
       <View style={styles.header}>
         <Text style={themeStyles.title}>{name.toUpperCase()}</Text>
+        <LikeButton item={character} isLiked={defineLike(id)} />
       </View>
       <View style={styles.content}>
         <View style={styles.imageWrapper}>
@@ -101,6 +105,9 @@ const styles = StyleSheet.create({
   },
   header: {
     marginBottom: styleVariables.gaps.g20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   content: {
     flexDirection: "row",

@@ -10,7 +10,7 @@ import { useCharacters } from "@/hooks/useCharacters";
 import { ErrorStatus } from "../statuses/ErrorStatus";
 import { EmptyList } from "./EmptyList";
 import { FooterList } from "./FooterList";
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { CharacterStackParamList } from "@/navigation/Navigation";
 import { useFavorites } from "@/hooks/useFavorites";
@@ -20,6 +20,8 @@ interface CharactersListProps {
 }
 
 export const CharactersList: FC<CharactersListProps> = ({ navigation }) => {
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
   const selectedSpecies = useAppSelector(selectSpecies);
   const selectedStatus = useAppSelector(selectStatus);
   const {
@@ -33,9 +35,12 @@ export const CharactersList: FC<CharactersListProps> = ({ navigation }) => {
     isOnline,
     refetchGetCharacters,
   } = useCharacters(selectedSpecies, selectedStatus);
-  const { defineLike } = useFavorites();
 
-  const [isRefreshing, setIsRefreshing] = useState(false);
+  useEffect(() => {
+    refetchGetCharacters();
+  }, [isRefreshing])
+
+  const { defineLike } = useFavorites();
 
   const handleRefresh = useCallback(async () => {
     setIsRefreshing(true);

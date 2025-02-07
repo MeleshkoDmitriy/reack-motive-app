@@ -1,4 +1,5 @@
-import { useGetFavoritesQuery } from "@/store/slices/api/favoritesApi";
+import { useLazyGetCharacterByIdQuery } from "@/store/slices/api/characterApi";
+import { useAddFavoriteMutation, useDeleteFavoriteMutation, useGetFavoritesQuery } from "@/store/slices/api/favoritesApi";
 
 export const useFavorites = (searchString: string = "") => {
   const { data, isLoading, isFetching, error, refetch } = useGetFavoritesQuery(
@@ -8,6 +9,9 @@ export const useFavorites = (searchString: string = "") => {
       refetchOnMountOrArgChange: true,
     }
   );
+  const [addFavorite] = useAddFavoriteMutation();
+  const [deleteFavorite] = useDeleteFavoriteMutation();
+  const [getLazyCharacterById] = useLazyGetCharacterByIdQuery();
 
   const defineLike = (id: number) => {
     return data ? data?.some((favorite) => favorite.id === id) : false;
@@ -20,5 +24,8 @@ export const useFavorites = (searchString: string = "") => {
     error,
     refetch,
     defineLike,
+    addFavorite,
+    deleteFavorite,
+    getLazyCharacterById,
   };
 };

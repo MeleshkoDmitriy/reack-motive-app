@@ -1,11 +1,9 @@
-import {
-  useAddFavoriteMutation,
-  useDeleteFavoriteMutation,
-} from "@/store/slices/api/favoritesApi";
+import { useFavorites } from "@/hooks/useFavorites";
 import { styleVariables } from "@/styles/variables";
 import { TCharacter } from "@/types/CharacterTypes";
+import { TFavorite } from "@/types/FavoritesTypes";
 import { Ionicons } from "@expo/vector-icons";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { TouchableOpacity } from "react-native";
 
 interface LikeButtonProps {
@@ -14,13 +12,10 @@ interface LikeButtonProps {
 }
 
 export const LikeButton: FC<LikeButtonProps> = ({ item, isLiked }) => {
-  const [isFavorite, setIsFavorite] = useState<boolean>(isLiked);
-
-  const [addFavorite] = useAddFavoriteMutation();
-  const [deleteFavorite] = useDeleteFavoriteMutation();
+  const { addFavorite, deleteFavorite } = useFavorites();
 
   const handleFavoriteToggle = async () => {
-    const favorite = {
+    const favorite: TFavorite = {
       id: item.id,
       name: item.name,
       image: item.image,
@@ -30,23 +25,23 @@ export const LikeButton: FC<LikeButtonProps> = ({ item, isLiked }) => {
     };
 
     try {
-      if (isFavorite) {
+      if (isLiked) {
         await deleteFavorite(favorite.id.toString());
       } else {
         await addFavorite(favorite);
       }
-      setIsFavorite((prev) => !prev);
     } catch (error) {
       console.error("Something went wrong with favorites action: ", error);
     }
   };
+
   return (
     <TouchableOpacity onPress={handleFavoriteToggle}>
       <Ionicons
-        name={isFavorite ? "heart" : "heart-outline"}
+        name={isLiked ? "heart" : "heart-outline"}
         size={24}
         color={
-          isFavorite
+          isLiked
             ? styleVariables.colors.indicator.Female
             : styleVariables.colors.indicator.unknown
         }
@@ -54,3 +49,4 @@ export const LikeButton: FC<LikeButtonProps> = ({ item, isLiked }) => {
     </TouchableOpacity>
   );
 };
+

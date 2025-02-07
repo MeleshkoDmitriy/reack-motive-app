@@ -3,12 +3,7 @@ import { styleVariables } from "@/styles/variables";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { IdentityIndicator } from "../IdentityIndicator";
 import { TCharacter } from "@/types/CharacterTypes";
-import { FC, useState } from "react";
-import { Ionicons } from "@expo/vector-icons";
-import {
-  useAddFavoriteMutation,
-  useDeleteFavoriteMutation,
-} from "@/store/slices/api/favoritesApi";
+import { FC } from "react";
 import { LikeButton } from "../shared/buttons/LikeButton/LikeButton";
 
 interface CharacterCardProps {
@@ -31,7 +26,9 @@ export const CharacterCard: FC<CharacterCardProps> = ({
           <View style={styles.imageWrapper}>
             <Image style={styles.image} source={{ uri: item.image }} />
           </View>
-          <LikeButton item={item} isLiked={isLiked} />
+          <View style={styles.like}>
+            <LikeButton item={item} isLiked={isLiked} />
+          </View>
           <View style={styles.detailsWrapper}>
             <View style={styles.details}>
               <Text style={themeStyles.title}>{item.name}</Text>
@@ -86,5 +83,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: styleVariables.gaps.g10,
+  },
+  like: {
+    position: "absolute",
+    top: styleVariables.gaps.g10,
+    left: styleVariables.gaps.g10,
   },
 });
