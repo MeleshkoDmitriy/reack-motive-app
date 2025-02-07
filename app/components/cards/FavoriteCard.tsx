@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     overflow: "hidden",
-    marginHorizontal: styleVariables.gaps.g10,
+    marginHorizontal: styleVariables.gaps.g20,
     marginBottom: styleVariables.gaps.g20,
     padding: styleVariables.gaps.g10,
   },

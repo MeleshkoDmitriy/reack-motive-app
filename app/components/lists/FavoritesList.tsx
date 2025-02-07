@@ -5,13 +5,17 @@ import { ErrorStatus } from "../statuses/ErrorStatus";
 import { FooterList } from "./FooterList";
 import { EmptyList } from "./EmptyList";
 import { styleVariables } from "@/styles/variables";
-import { useCallback, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import { useFavorites } from "@/hooks/useFavorites";
 
-export const FavoritesList = () => {
+interface FavoritesListProps {
+  searchValue: string;
+}
+
+export const FavoritesList: FC<FavoritesListProps> = ({ searchValue }) => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const { data, refetch, isFetching, isLoading, error, defineLike } =
-    useFavorites();
+    useFavorites(searchValue);
 
   const handleRefresh = useCallback(async () => {
     setIsRefreshing(true);
@@ -46,7 +50,7 @@ export const FavoritesList = () => {
         refreshing={isRefreshing}
         onRefresh={handleRefresh}
         ListFooterComponent={<FooterList />}
-        ListEmptyComponent={EmptyList}
+        ListEmptyComponent={searchValue !== "" ? <EmptyList title="No characters found!" /> :<EmptyList />}
       />
     </View>
   );
