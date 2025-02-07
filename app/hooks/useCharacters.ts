@@ -8,6 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import NetInfo from "@react-native-community/netinfo";
 import { useOnline } from "./useOnline";
+import { useGetFavoritesQuery } from "@/store/slices/api/favoritesApi";
 
 export const useCharacters = (
   selectedSpecies: TFilterCharacterSpecies,
@@ -17,14 +18,13 @@ export const useCharacters = (
   const [offlineCharacters, setOfflineCharacters] = useState<TCharacter[]>([]);
   const [page, setPage] = useState(1);
   const { isOnline } = useOnline();
-  
-
 
   const {
     data: charactersData,
     error: charactersError,
     isLoading,
     isFetching,
+    refetch: refetchGetCharacters
   } = useGetCharactersQuery({
     page,
     species: selectedSpecies,
@@ -98,6 +98,7 @@ export const useCharacters = (
     isFetching,
     loadMoreCharacters,
     loadOfflineCharacters,
-    isOnline
+    isOnline,
+    refetchGetCharacters,
   };
 };

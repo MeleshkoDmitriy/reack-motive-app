@@ -6,12 +6,24 @@ import { FooterList } from "./FooterList";
 import { EmptyList } from "./EmptyList";
 import { styleVariables } from "@/styles/variables";
 import { useGetFavoritesQuery } from "@/store/slices/api/favoritesApi";
+import { useCallback, useEffect, useState } from "react";
+import { useOnline } from "@/hooks/useOnline";
+import { useFavorites } from "@/hooks/useFavorites";
 
 export const FavoritesList = () => {
-  const { data, isLoading, isFetching, error } = useGetFavoritesQuery("rick", {
-    refetchOnFocus: true,
-    pollingInterval: 10000,
-  });
+  const isOnline = useOnline();
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const { data, refetch, isFetching, isLoading, error } = useFavorites("");
+
+  const handleRefresh = useCallback(async () => {
+    setIsRefreshing(true);
+    await refetch();
+    setIsRefreshing(false);
+  }, [refetch]);
+
+  useEffect(() => {
+    refetch();
+  }, [isOnline]);
 
   if (isLoading || isFetching) {
     return (
@@ -40,6 +52,8 @@ export const FavoritesList = () => {
             // onPress={}
           />
         )}
+        refreshing={isRefreshing}
+        onRefresh={handleRefresh}
         ListFooterComponent={<FooterList />}
         // ItemSeparatorComponent={CharacterSeparator}
         ListEmptyComponent={EmptyList}

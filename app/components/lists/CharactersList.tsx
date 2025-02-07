@@ -10,9 +10,10 @@ import { useCharacters } from "@/hooks/useCharacters";
 import { ErrorStatus } from "../statuses/ErrorStatus";
 import { EmptyList } from "./EmptyList";
 import { FooterList } from "./FooterList";
-import { FC } from "react";
+import { FC, useCallback, useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { CharacterStackParamList } from "@/navigation/Navigation";
+import { useFavorites } from "@/hooks/useFavorites";
 
 interface CharactersListProps {
   navigation: StackNavigationProp<CharacterStackParamList, "CHARACTERS">;
@@ -21,7 +22,6 @@ interface CharactersListProps {
 export const CharactersList: FC<CharactersListProps> = ({ navigation }) => {
   const selectedSpecies = useAppSelector(selectSpecies);
   const selectedStatus = useAppSelector(selectStatus);
-
   const {
     characters,
     offlineCharacters,
@@ -31,7 +31,17 @@ export const CharactersList: FC<CharactersListProps> = ({ navigation }) => {
     loadMoreCharacters,
     loadOfflineCharacters,
     isOnline,
+    refetchGetCharacters,
   } = useCharacters(selectedSpecies, selectedStatus);
+  const { defineLike } = useFavorites();
+
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const handleRefresh = useCallback(async () => {
+    setIsRefreshing(true);
+    await refetchGetCharacters();
+    setIsRefreshing(false);
+  }, [refetchGetCharacters]);
 
   if (isLoading && characters.length === 0 && isOnline) {
     return <Spinner />;
@@ -50,11 +60,14 @@ export const CharactersList: FC<CharactersListProps> = ({ navigation }) => {
           renderItem={({ item }) => (
             <CharacterCard
               item={item}
+              isLiked={defineLike(item.id)}
               onPress={() => navigation.navigate(routesStack.PROFILE, item)}
             />
           )}
           onEndReached={loadMoreCharacters}
           onEndReachedThreshold={0.5}
+          refreshing={isRefreshing}
+          onRefresh={handleRefresh}
           ListFooterComponent={isFetching ? <Spinner /> : <FooterList />}
           ItemSeparatorComponent={CharacterSeparator}
           ListEmptyComponent={EmptyList}
@@ -68,6 +81,7 @@ export const CharactersList: FC<CharactersListProps> = ({ navigation }) => {
             renderItem={({ item }) => (
               <CharacterCard
                 item={item}
+                isLiked={defineLike(item.id)}
                 onPress={() => navigation.navigate(routesStack.PROFILE, item)}
               />
             )}

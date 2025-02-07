@@ -6,6 +6,7 @@ import { TCharacterRequest, TCharacterResponse } from '@/types/CharacterTypes';
 export const charactersApi = createApi({
   reducerPath: "charactersApi",
   baseQuery: fetchBaseQuery({ baseUrl: CHARACTERS_URL }),
+  keepUnusedDataFor: 20,
   endpoints: (builder) => ({
     getCharacters: builder.query<TCharacterResponse, TCharacterRequest>({
       query: ({ page, species, status }) => {

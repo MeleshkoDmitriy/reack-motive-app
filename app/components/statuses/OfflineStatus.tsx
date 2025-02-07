@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import { Button } from "../shared/buttons/Button.ios";
+import { Button } from "../shared/buttons/Button/Button.ios";
 import { FC } from "react";
 import { useAppTheme } from "@/hooks/useAppTheme";
 import { styleVariables } from "@/styles/variables";

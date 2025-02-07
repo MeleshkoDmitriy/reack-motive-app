@@ -14,8 +14,8 @@ import { styleVariables } from "@/styles/variables";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import { Button } from "./shared/buttons/Button";
 import { useAppTheme } from "@/hooks/useAppTheme";
+import { Button } from "./shared/buttons/Button/Button";
 
 const DropdownFilters = () => {
   const dispatch = useAppDispatch();

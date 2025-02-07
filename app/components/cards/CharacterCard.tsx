@@ -1,22 +1,27 @@
 import { useAppTheme } from "@/hooks/useAppTheme";
 import { styleVariables } from "@/styles/variables";
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { IdentityIndicator } from "../IdentityIndicator";
 import { TCharacter } from "@/types/CharacterTypes";
-import { FC } from "react";
+import { FC, useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
+import {
+  useAddFavoriteMutation,
+  useDeleteFavoriteMutation,
+} from "@/store/slices/api/favoritesApi";
+import { LikeButton } from "../shared/buttons/LikeButton/LikeButton";
 
 interface CharacterCardProps {
-  item: TCharacter
+  item: TCharacter;
+  isLiked: boolean;
   onPress: () => void;
 }
 
-export const CharacterCard: FC<CharacterCardProps> = ({ item, onPress }) => {
+export const CharacterCard: FC<CharacterCardProps> = ({
+  item,
+  isLiked,
+  onPress,
+}) => {
   const themeStyles = useAppTheme();
 
   return (
@@ -26,6 +31,7 @@ export const CharacterCard: FC<CharacterCardProps> = ({ item, onPress }) => {
           <View style={styles.imageWrapper}>
             <Image style={styles.image} source={{ uri: item.image }} />
           </View>
+          <LikeButton item={item} isLiked={isLiked} />
           <View style={styles.detailsWrapper}>
             <View style={styles.details}>
               <Text style={themeStyles.title}>{item.name}</Text>
@@ -70,7 +76,7 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     aspectRatio: 1,
-    objectFit: 'cover',    
+    objectFit: "cover",
   },
   detailsWrapper: {
     flex: 1,
@@ -78,7 +84,7 @@ const styles = StyleSheet.create({
   },
   details: {
     flexDirection: "row",
-    alignItems: 'center',
+    alignItems: "center",
     gap: styleVariables.gaps.g10,
   },
 });

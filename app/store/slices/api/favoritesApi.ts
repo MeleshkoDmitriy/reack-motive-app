@@ -5,6 +5,7 @@ import { TFavorite } from "@/types/FavoritesTypes";
 export const favoritesApi = createApi({
   reducerPath: "favoritesApi",
   baseQuery: fetchBaseQuery({ baseUrl: FAVORITES_URL }),
+  keepUnusedDataFor: 20,
   tagTypes: ["favorites"],
   endpoints: (builder) => ({
     getFavorites: builder.query<TFavorite[], string | void>({
