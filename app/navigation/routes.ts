@@ -6,4 +6,5 @@ export const routesStack = {
 export const routesTabs = {
   CHARACTERS: "Main",
   SETTINGS: "Settings",
+  FAVORITES: "Favorites",
 };

@@ -9,9 +9,10 @@ import { styleVariables } from "@/styles/variables";
 import { Ionicons } from "@expo/vector-icons";
 import { tabsStyles } from "@/styles/styles";
 import { TCharacter } from "@/types/CharacterTypes";
+import { FavoritesScreen } from "@/screens/FavoritesScreen";
 
 export type CharacterStackParamList = {
-  CHARACTERS: undefined; 
+  CHARACTERS: undefined;
   PROFILE: TCharacter;
 };
 
@@ -51,6 +52,7 @@ export const Navigation = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
+        initialRouteName={routesTabs.CHARACTERS}
         screenOptions={{
           tabBarShowLabel: false,
           tabBarActiveTintColor: styleVariables.colors.white,
@@ -69,6 +71,20 @@ export const Navigation = () => {
           },
         }}
       >
+        <Tab.Screen
+          name={routesTabs.FAVORITES}
+          component={FavoritesScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons
+                name="heart"
+                size={size}
+                color={color}
+                style={tabsStyles}
+              />
+            ),
+          }}
+        />
         <Tab.Screen
           name={routesTabs.CHARACTERS}
           component={CharacterStack}
