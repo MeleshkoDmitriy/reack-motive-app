@@ -3,7 +3,7 @@ import { CharactersList } from "@/components/lists/CharactersList";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { useAppTheme } from "@/hooks/useAppTheme";
 import { CharacterStackParamList } from "@/navigation/Navigation";
-import { loadThemeFromStorage, selectTheme } from "@/store/slices/themeSlice";
+import { loadThemeFromStorage } from "@/store/slices/themeSlice";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useCallback, useEffect, useRef } from "react";
 import { View } from "react-native";

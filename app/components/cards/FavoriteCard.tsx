@@ -2,7 +2,7 @@ import { useAppTheme } from "@/hooks/useAppTheme";
 import { styleVariables } from "@/styles/variables";
 import { TFavorite } from "@/types/FavoritesTypes";
 import { FC, useCallback, useState } from "react";
-import { Pressable, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Image, TouchableOpacity, View } from "react-native";
 import { IdentityIndicator } from "../IdentityIndicator";
 import { TCharacter } from "@/types/CharacterTypes";
