@@ -34,5 +34,6 @@ You can navigate between screens using a tab menu at the bottom of the screen. T
 ## Implementation
 1. API requests are made using RTK Query, which improves user experience by caching data and updating it as needed.
 2. Node.js and Express application called Reack Motive Back was created to store data and handle GET (with search query), POST and DELETE requests. Here is the link to the repository for this project: [Reack Motive Back](https://github.com/MeleshkoDmitriy/reack-motive-back)
+3. The app uses Async Storage to save the selected theme mode and store the 10 last loaded characters for offline access.
 
 **Important!** This Node.js application is hosted on the Vercel platform, and it may refresh the state every 20-30 minutes. Your favorite characters will be cleared each time this happens.
