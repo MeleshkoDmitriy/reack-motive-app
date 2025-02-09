@@ -11,6 +11,7 @@ Reack Motive App is an application built using TypeScript, React Native, Expo, R
 - React Native, Expo
 - Redux Toolkit
 - RTK Query
+- Node.js, Express
 - The Rick and Morty API
 
 ## App Screens
