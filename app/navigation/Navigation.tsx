@@ -10,6 +10,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { tabsStyles } from "@/styles/styles";
 import { TCharacter } from "@/types/CharacterTypes";
 import { FavoritesScreen } from "@/screens/FavoritesScreen";
+import { useFavorites } from "@/hooks/useFavorites";
 
 export type CharacterStackParamList = {
   CHARACTERS: undefined;
@@ -49,6 +50,8 @@ const CharacterStack = () => (
 const Tab = createBottomTabNavigator();
 
 export const Navigation = () => {
+  const { favoriteCounter } = useFavorites();
+
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -83,6 +86,7 @@ export const Navigation = () => {
                 style={tabsStyles}
               />
             ),
+            tabBarBadge: favoriteCounter || undefined,
           }}
         />
         <Tab.Screen

@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderWidth: 1,
     borderColor: styleVariables.colors.primary,
-    backgroundColor: styleVariables.colors.white,
+    backgroundColor: styleVariables.colors.secondaryLight,
     borderRadius: styleVariables.borderRadiuses.r10,
     height: 45,
   },
@@ -73,5 +73,6 @@ const styles = StyleSheet.create({
     flex: 1,
     color: styleVariables.colors.primary,
     fontSize: styleVariables.fonts.f16,
+    backgroundColor: styleVariables.colors.secondaryLight,
   },
 });

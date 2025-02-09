@@ -5,8 +5,9 @@ import { useAppTheme } from "@/hooks/useAppTheme";
 import { CharacterStackParamList } from "@/navigation/Navigation";
 import { loadThemeFromStorage, selectTheme } from "@/store/slices/themeSlice";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { View } from "react-native";
+import { FlatList as RNFlatList } from 'react-native'; 
 
 interface CharactersScreenProps {
   navigation: StackNavigationProp<CharacterStackParamList, "CHARACTERS">;
@@ -17,6 +18,7 @@ export const CharactersScreen: React.FC<CharactersScreenProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const themeStyles = useAppTheme();
+  const listRef = useRef<RNFlatList<any>>(null)
 
   useEffect(() => {
     const initializeTheme = async () => {
@@ -30,10 +32,16 @@ export const CharactersScreen: React.FC<CharactersScreenProps> = ({
     initializeTheme();
   }, [dispatch]);
 
+  const handleReset = useCallback(() => {
+    if (listRef.current) {
+      listRef.current.scrollToOffset({ animated: true, offset: 0 });
+    }
+  }, []);
+  
   return (
     <View style={themeStyles.wrapper}>
-      <DropdownFilters />
-      <CharactersList navigation={navigation} />
+      <DropdownFilters handleReset={handleReset} />
+      <CharactersList ref={listRef} navigation={navigation} />
     </View>
   );
 };

@@ -22,6 +22,8 @@ export const useFavorites = (searchString: string = "") => {
     return data ? data?.some((favorite) => favorite.id === id) : false;
   };
 
+  const favoriteCounter = data ? data.length : undefined;
+
   return {
     data,
     isLoading,
@@ -32,5 +34,6 @@ export const useFavorites = (searchString: string = "") => {
     addFavorite,
     deleteFavorite,
     getLazyCharacterById,
+    favoriteCounter
   };
 };

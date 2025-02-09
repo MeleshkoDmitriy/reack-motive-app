@@ -1,12 +1,14 @@
 import { useAppTheme } from "@/hooks/useAppTheme";
 import { styleVariables } from "@/styles/variables";
 import { TFavorite } from "@/types/FavoritesTypes";
-import { FC } from "react";
-import { StyleSheet } from "react-native";
+import { FC, useCallback, useState } from "react";
+import { Pressable, StyleSheet } from "react-native";
 import { Image, TouchableOpacity, View } from "react-native";
 import { IdentityIndicator } from "../IdentityIndicator";
 import { TCharacter } from "@/types/CharacterTypes";
 import { LikeButton } from "../shared/buttons/LikeButton/LikeButton";
+import { FavoriteProfile } from "../profiles/FavoriteProfile";
+import { AppModal } from "../shared/AppModal";
 
 interface FavoriteCardProps {
   item: TFavorite | TCharacter;
@@ -15,10 +17,15 @@ interface FavoriteCardProps {
 
 export const FavoriteCard: FC<FavoriteCardProps> = ({ item, isLiked }) => {
   const themeStyles = useAppTheme();
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleCardClick = useCallback(() => {
+    setModalVisible(true);
+  }, []);
 
   return (
     <View style={[themeStyles.container, styles.container]}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={handleCardClick}>
         <View style={styles.content}>
           <View style={styles.imageWrapper}>
             <Image style={styles.image} source={{ uri: item.image }} />
@@ -28,11 +35,14 @@ export const FavoriteCard: FC<FavoriteCardProps> = ({ item, isLiked }) => {
             <IdentityIndicator info={item.status} />
             <IdentityIndicator info={item.species} />
           </View>
-          <View style={styles.like}>
+          <View>
             <LikeButton item={item} isLiked={isLiked} />
           </View>
         </View>
       </TouchableOpacity>
+      <AppModal modalVisible={modalVisible} setModalVisible={setModalVisible}>
+          <FavoriteProfile favorite={item} />
+      </AppModal>
     </View>
   );
 };
@@ -68,5 +78,4 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     gap: styleVariables.gaps.g10,
   },
-  like: {},
 });

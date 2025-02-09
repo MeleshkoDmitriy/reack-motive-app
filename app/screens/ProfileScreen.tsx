@@ -1,4 +1,4 @@
-import { CharacterProfile } from "@/components/CharacterProfile";
+import { CharacterProfile } from "@/components/profiles/CharacterProfile";
 import { useAppTheme } from "@/hooks/useAppTheme";
 import { CharacterStackParamList } from "@/navigation/Navigation";
 import { RouteProp } from "@react-navigation/core";

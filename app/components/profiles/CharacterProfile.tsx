@@ -3,10 +3,10 @@ import { styleVariables } from "@/styles/variables";
 import { TCharacter } from "@/types/CharacterTypes";
 import { FC } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import { IdentityIndicator } from "./IdentityIndicator";
 import { getFormattedDate } from "@/utils/getFormattedDate";
-import { LikeButton } from "./shared/buttons/LikeButton/LikeButton";
 import { useFavorites } from "@/hooks/useFavorites";
+import { LikeButton } from "../shared/buttons/LikeButton/LikeButton";
+import { IdentityIndicator } from "../IdentityIndicator";
 
 interface CharacterProfileProps {
   character: TCharacter;

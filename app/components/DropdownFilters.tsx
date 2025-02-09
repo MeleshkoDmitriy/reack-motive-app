@@ -11,13 +11,19 @@ import {
   setStatus,
 } from "@/store/slices/filterSlice";
 import { styleVariables } from "@/styles/variables";
-import React from "react";
+import React, { FC } from "react";
 import { StyleSheet, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { useAppTheme } from "@/hooks/useAppTheme";
 import { Button } from "./shared/buttons/Button/Button";
 
-const DropdownFilters = () => {
+interface DropdownFiltersProps {
+  handleReset: () => void;
+}
+
+const DropdownFilters: FC<DropdownFiltersProps> = ({
+  handleReset
+}) => {
   const dispatch = useAppDispatch();
   const selectedSpecies = useAppSelector(selectSpecies);
   const selectedStatus = useAppSelector(selectStatus);
@@ -26,6 +32,7 @@ const DropdownFilters = () => {
 
   const handleResetFilters = () => {
     dispatch(resetFilters());
+    handleReset();
   };
 
   return (
