@@ -28,7 +28,7 @@ const CharacterStack = () => (
     />
     <Stack.Screen
       name={routesStack.PROFILE}
-      component={ProfileScreen}
+      component={ProfileScreen} // pass character object as navigation prop to ProfileScreen
       options={({ route }) => {
         const { name } = route.params as TCharacter;
         return {
